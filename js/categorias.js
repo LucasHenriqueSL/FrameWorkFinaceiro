@@ -80,18 +80,19 @@ function apagarCategoria(id){
 }
 
 function editarCategoria(id){
-    for(let i = 0; i < categoria.length; i++){
-        if(categoria[i].id == id){
-          document.getElementById("id").value = categoria[i].id;
-          document.getElementById("pnome").value = categoria[i].nome;      
+    let categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
+  for(let i = 0; i < categoriasGravadas.length; i++){
+      if(categoriasGravadas[i].id == id){
+        document.getElementById("nome").value = categoriasGravadas[i].nome;
+   
       }
-      }
+   }
 }
 function atualizar(){
     const nome = document.getElementById('nome').value;
 
   
-    categoria[id] = {nome};
+    categoria[i] = {nome};
   
     Swal.fire({
       
