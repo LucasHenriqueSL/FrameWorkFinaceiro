@@ -83,14 +83,26 @@ function editarCategoria(id){
     for(let i = 0; i < categoria.length; i++){
         if(categoria[i].id == id){
           document.getElementById("id").value = categoria[i].id;
-          document.getElementById("pnome").value = categoria[i].nome;
-         
-          
-    
-        }
-    
+          document.getElementById("pnome").value = categoria[i].nome;      
+      }
       }
 }
+function atualizar(){
+    const nome = document.getElementById('nome').value;
+
+  
+    categoria[id] = {nome};
+  
+    Swal.fire({
+      
+      icon: 'success',
+      title: 'Categoria atualizada com sucesso!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    listarCategorias();
+    Limpar()
+  }
 
 
 function Limpar(){
