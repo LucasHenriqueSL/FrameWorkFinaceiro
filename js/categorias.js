@@ -79,6 +79,19 @@ function apagarCategoria(id){
     })
 }
 
+function editarCategoria(id){
+    for(let i = 0; i < categoria.length; i++){
+        if(categoria[i].id == id){
+          document.getElementById("id").value = categoria[i].id;
+          document.getElementById("pnome").value = categoria[i].nome;
+         
+          
+    
+        }
+    
+      }
+}
+
 
 function Limpar(){
     let inputs = document.getElementsByTagName('input');

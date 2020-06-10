@@ -92,7 +92,37 @@ function ListarCatContas(){
         row.innerHTML = linhacad;
     });
 }
+function editarContas(id){
+    for(let i = 0; i < conta.length; i++){
+      if(conta[i].id == id){
+  
 
+        document.getElementById("descricao").value = conta[i].descricao;
+        document.getElementById("tipo").value = conta[i].tipo;
+        document.getElementById("categorias").value = conta[i].categorias;
+
+      }
+    }
+  }
+  function atualizar(){
+
+
+    const descricao = document.getElementById('descricao').value;
+    const tipo = document.getElementById('tipo').value;
+    const categoria = document.getElementById('categorias').value;
+  
+    conta[i] = {descricao, tipo, categoria};
+  
+    Swal.fire({
+      
+      icon: 'success',
+      title: 'Conta atualizada com sucesso!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    listarContas();
+    Limpar()
+  }
 
 function Limpar(){
     let inputs = document.getElementsByTagName('input');
