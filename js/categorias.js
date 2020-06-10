@@ -88,11 +88,13 @@ function editarCategoria(id){
       }
    }
 }
-function atualizar(){
+function atualizar(id){
     const nome = document.getElementById('nome').value;
 
-  
-    categoria[i] = {nome};
+    let categoriasGravadas = JSON.parse(windows.localStorage.getItem("categorias"));
+    let categoriaIndex = categoriasGravadas.findIndex(categoria => categoria.id === id);
+
+    categoriasGravadas[i] = {id,nome};
   
     Swal.fire({
       
