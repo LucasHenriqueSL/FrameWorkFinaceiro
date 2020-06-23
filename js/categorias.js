@@ -79,14 +79,19 @@ function apagarCategoria(id){
     })
 }
 
-function editarCategoria(id){
-    let categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
-  for(let i = 0; i < categoriasGravadas.length; i++){
-      if(categoriasGravadas[i].id == id){
-        document.getElementById("nome").value = categoriasGravadas[i].nome;
-   
-      }
-   }
+function alterarcategorias(){
+    const id = document.getElementById("id").value;
+    const nome = document.getElementById("nome").value;
+    categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
+    let categoriasIndex = categoriasGravadas.findIndex(categoria => categoria.id == id);
+
+ if (categoriasIndex >= 0){
+     categoriasGravadas[categoriasIndex] = {id,nome};
+     window.localStorage.setItem("categorias",JSON.stringify(categoriasGravadas));
+
+
+ } 
+
 }
 function atualizar(id){
     const nome = document.getElementById('nome').value;
