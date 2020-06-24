@@ -1,4 +1,5 @@
 function cadConta(){
+    const id = document.getElementById('id').value;
     const descricao = document.getElementById('descricao').value;
     const tipo = document.getElementById('tipo').value;
     const categoria = document.getElementById('categorias').value;
@@ -92,17 +93,28 @@ function ListarCatContas(){
         row.innerHTML = linhacad;
     });
 }
-function editarContas(id){
-    for(let i = 0; i < conta.length; i++){
-      if(conta[i].id == id){
+function alterarProduto(){
+    const id = document.getElementById("id").value;
+    const descricao = document.getElementById("descricao").value;
+    const tipo = document.getElementById("tipo").value;
+    const categoria = document.getElementById("categoria").value;
   
-
-        document.getElementById("descricao").value = conta[i].descricao;
-        document.getElementById("tipo").value = conta[i].tipo;
-        document.getElementById("categorias").value = conta[i].categorias;
-
-      }
+    contagravada = JSON.parse(window.localStorage.getItem("contas"));
+    let containdex = contagravada.findIndex((contas => contas.id == id));
+    if(containdex >= 0){
+    contagravada[containdex] = {id,descricao,tipo,categoria};
+    window.localStorage.setItem("contas",JSON.stringify(contagravada));
     }
+    Swal.fire({
+      
+      icon: 'success',
+      title: 'Conta atualizada com sucesso!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    Limpar();
+    listarContas();
+  
   }
   function atualizar(){
 

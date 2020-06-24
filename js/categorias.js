@@ -1,4 +1,5 @@
 function cadCategoria(){
+    const id = document.getElementById('id').value;
     const nome = document.getElementById('nome').value;
     
     if (nome == ""){
@@ -79,38 +80,51 @@ function apagarCategoria(id){
     })
 }
 
-function alterarcategorias(){
-    const id = document.getElementById("id").value;
-    const nome = document.getElementById("nome").value;
-    categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
-    let categoriasIndex = categoriasGravadas.findIndex(categoria => categoria.id == id);
+function editarCategoria(id){
+    let categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
+  for(let i = 0; i < categoriasGravadas.length; i++){
+      if(categoriasGravadas[i].id == id){
+        document.getElementById("nome").value = categoriasGravadas[i].nome;
+   
+      }
+   
 
- if (categoriasIndex >= 0){
-     categoriasGravadas[categoriasIndex] = {id,nome};
-     window.localStorage.setItem("categorias",JSON.stringify(categoriasGravadas));
-
-
- } 
+   }
 
 }
-function atualizar(id){
-    const nome = document.getElementById('nome').value;
 
-    let categoriasGravadas = JSON.parse(windows.localStorage.getItem("categorias"));
-    let categoriaIndex = categoriasGravadas.findIndex(categoria => categoria.id === id);
-
-    categoriasGravadas[i] = {id,nome};
-  
-    Swal.fire({
+     function atualizar(){
+        const id = document.getElementById("id").value;
+        const nome = document.getElementById("nome").value;
+        if (nome == ""){
+            Swal.fire({
+                icon: 'error',
+                title: 'Informe a categoria!',
+                text: '',
+                footer: ''
+            })
+        }else{
+        categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
+        let categoriasIndex = categoriasGravadas.findIndex((categorias => categorias.id == id));
+        debugger
+        if(categoriasIndex >= 0){
+          
+            categoriasGravadas[categoriasIndex] = {id,nome};
+          window.localStorage.setItem("categorias",JSON.stringify(categoriasGravadas));
+          }
+        Swal.fire({
+          
+          icon: 'success',
+          title: 'Categoria atualizado com sucesso!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+    }
+        limpar();
+        listarCategorias();
       
-      icon: 'success',
-      title: 'Categoria atualizada com sucesso!',
-      showConfirmButton: false,
-      timer: 1500
-    });
-    listarCategorias();
-    Limpar()
-  }
+      }
+
 
 
 function Limpar(){
