@@ -82,48 +82,35 @@ function apagarCategoria(id){
 
 function editarCategoria(id){
     let categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
-  for(let i = 0; i < categoriasGravadas.length; i++){
-      if(categoriasGravadas[i].id == id){
-        document.getElementById("nome").value = categoriasGravadas[i].nome;
-   
-      }
-   
-
+    for(i = 0; i < categoriasGravadas.length; i++){
+        if(categoriasGravadas[i].id == id){
+  
+          document.getElementById("id").value = categoriasGravadas[i].id;
+          document.getElementById("nome").value = categoriasGravadas[i].nome;
+        }
    }
-
 }
 
-     function atualizar(){
-        const id = document.getElementById("id").value;
-        const nome = document.getElementById("nome").value;
-        if (nome == ""){
-            Swal.fire({
-                icon: 'error',
-                title: 'Informe a categoria!',
-                text: '',
-                footer: ''
-            })
-        }else{
-        categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
-        let categoriasIndex = categoriasGravadas.findIndex((categorias => categorias.id == id));
-        debugger
-        if(categoriasIndex >= 0){
-          
-            categoriasGravadas[categoriasIndex] = {id,nome};
-          window.localStorage.setItem("categorias",JSON.stringify(categoriasGravadas));
-          }
-        Swal.fire({
-          
-          icon: 'success',
-          title: 'Categoria atualizado com sucesso!',
-          showConfirmButton: false,
-          timer: 1500
-        });
+  function atualizar(){
+    const id = document.getElementById('id').value;
+    const nome = document.getElementById('nome').value;
+  
+    categoriasGravadas = JSON.parse(window.localStorage.getItem('categorias'));
+    let categoriaIndex = categoriasGravadas.findIndex(categoria => categoria.id == id);
+    if(categoriaIndex >= 0){
+        categoriasGravadas[categoriaIndex] = {id,nome};
+        window.localStorage.setItem('categorias',JSON.stringify(categoriasGravadas));
     }
-        limpar();
-        listarCategorias();
+    Swal.fire({
       
-      }
+      icon: 'success',
+      title: 'Categoria atualizada com sucesso!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    listarCategorias();
+    Limpar()
+  }
 
 
 

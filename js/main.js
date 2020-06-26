@@ -3,8 +3,9 @@ function salvarUsuario(){
     const endereco = document.getElementById('endereco').value;
     const telefone = document.getElementById('telefone').value;
     const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
     const status = "Ativo"
+
+    const senha = document.getElementById('senha').value;
 
     if(nome == "" || endereco == "" || telefone == "" || email == "" ||senha == ""){
         Swal.fire({
@@ -15,7 +16,8 @@ function salvarUsuario(){
         })
     }
     else{
-        const usuario = {id: Date.now(), nome, endereco, telefone, email, senha, status};
+        localStorage.senha = document.getElementById('senha').value;
+        const usuario = {id: Date.now(), nome, endereco, telefone, email, status};
 
         let usuarioGravado = JSON.parse(window.localStorage.getItem("usuarios"));
         if(usuarioGravado == null){
@@ -43,7 +45,8 @@ function salvarUsuario(){
 
 function logar(){
     email = document.getElementById('usuario').value;
-    senha = document.getElementById('lsenha').value;
+   var senhal = document.getElementById('lsenha').value;
+   var senha = localStorage.senha;
 
     let usuariosGravados = JSON.parse(window.localStorage.getItem("usuarios"));
     let usuarioIndex = usuariosGravados.findIndex(usuario => usuario.email == email);
@@ -65,34 +68,28 @@ function logar(){
         });
     }
     else{
-        if(usuariosGravados[usuarioIndex].senha != senha){
+        if(senhal != senha){
             Swal.fire({
                 icon: 'warning',
                 title: 'Senha incorreta!',
                 showConfirmButton: true,
                 timer: 1500
             });
-        }else{
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                onOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
+        }else if(senhal == senha){
+          window.location.href = 'menu.html';
+
+          Toast.fire({
+            icon: 'success',
+            title: `Bem-Vindo ${usuariosGravados[usuarioIndex.nome]}`
+            
+           })
+            
+
+              }
               
-              Toast.fire({
-                icon: 'success',
-                title: `Bem-Vindo ${usuariosGravados[usuarioIndex.nome]}`
-              })
-              window.location.href = 'menu.html';
         }
     }
-}
+
 function limpar(){
     let inputs = document.getElementsByTagName('input');
     for(let i = 0; i < inputs.length; i++){
@@ -103,3 +100,54 @@ function limpar(){
 function Logout(){
 
 }
+/////////////////////////// Editar senha
+
+function mostrar(){
+  var senha = localStorage.senha;
+  document.getElementById("sSenha").value = JSON.stringify(senha);
+
+}
+
+window.onload = mostrar;
+
+function editarUsuario(){
+    var senha = localStorage.senha;
+    var nsenha = document.getElementById("nsenha").value;
+
+    
+
+    if(senha != nsenha){
+
+      localStorage.senha = nsenha;
+      Swal.fire({
+      
+        icon: 'success',
+        title: 'Senha atualizada com sucesso!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      var delay = 1550; 
+  setTimeout(function(){
+    window.location.reload()
+          
+  },delay);
+
+    }else{
+      Swal.fire({
+        icon: 'warning',
+        title: 'A senha que vc digitou é a mesma que aanterior, Porfavor digite uma nova',
+        showConfirmButton: true,
+        timer: 3000
+    });
+
+    }
+    
+   
+
+
+  }
+
+//////////////////////////
+
+ 

@@ -93,38 +93,33 @@ function ListarCatContas(){
         row.innerHTML = linhacad;
     });
 }
-function alterarProduto(){
-    const id = document.getElementById("id").value;
-    const descricao = document.getElementById("descricao").value;
-    const tipo = document.getElementById("tipo").value;
-    const categoria = document.getElementById("categoria").value;
+
+function editarContas(id){
+    let contasGravadas = JSON.parse(window.localStorage.getItem("contas"));
+    for(i = 0; i < contasGravadas.length; i++){
+        if(contasGravadas[i].id == id){
   
-    contagravada = JSON.parse(window.localStorage.getItem("contas"));
-    let containdex = contagravada.findIndex((contas => contas.id == id));
-    if(containdex >= 0){
-    contagravada[containdex] = {id,descricao,tipo,categoria};
-    window.localStorage.setItem("contas",JSON.stringify(contagravada));
-    }
-    Swal.fire({
-      
-      icon: 'success',
-      title: 'Conta atualizada com sucesso!',
-      showConfirmButton: false,
-      timer: 1500
-    });
-    Limpar();
-    listarContas();
+          document.getElementById("id").value = contasGravadas[i].id;
+          document.getElementById("descricao").value = contasGravadas[i].descricao;
+          document.getElementById("tipo").value = contasGravadas[i].tipo;
+          document.getElementById("categorias").value = contasGravadas[i].categoria;
   
-  }
+        }
+   }
+}
+
   function atualizar(){
-
-
+    const id = document.getElementById('id').value;
     const descricao = document.getElementById('descricao').value;
     const tipo = document.getElementById('tipo').value;
     const categoria = document.getElementById('categorias').value;
   
-    conta[i] = {descricao, tipo, categoria};
-  
+    contasGravadas = JSON.parse(window.localStorage.getItem('contas'));
+    let contaIndex = contasGravadas.findIndex(conta => conta.id == id);
+    if(contaIndex >= 0){
+        contasGravadas[contaIndex] = {id,descricao,tipo,categoria};
+        window.localStorage.setItem('contas',JSON.stringify(contasGravadas));
+    }
     Swal.fire({
       
       icon: 'success',
